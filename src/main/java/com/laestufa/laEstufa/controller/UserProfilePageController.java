@@ -5,6 +5,7 @@ import com.laestufa.laEstufa.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -21,8 +22,8 @@ public class UserProfilePageController {
     @Autowired
     UserRepository userRepository;
 
-    @RequestMapping(value = "/profile", method = RequestMethod.GET)
-    public String getUserProfilePage (Model model) {
+    @RequestMapping(value = "/user/{userLogin}", method = RequestMethod.GET)
+    public String getUserProfilePage (@PathVariable(value = "userLogin", required = true) String userLogin, Model model) {
 
 //        userRepository.findAll().forEach((UserModel e) -> model.addAttribute("Users", e));
 

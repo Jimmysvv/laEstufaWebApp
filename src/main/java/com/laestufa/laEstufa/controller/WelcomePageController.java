@@ -10,6 +10,7 @@ public class WelcomePageController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getWelcomePage (Model model) {
+        model.addAttribute("title", "Home Page");
         return "WelcomePage";
     }
 }

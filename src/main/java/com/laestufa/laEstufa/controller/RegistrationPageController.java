@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping(value = "register")
+@RequestMapping(value = "/register")
 public class RegistrationPageController {
 
     @Autowired
