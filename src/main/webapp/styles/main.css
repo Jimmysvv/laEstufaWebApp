@@ -1,16 +1,19 @@
 .header {
     background-color: #b33939;
     color: black;
-    position: absolute;
-    top: -32px;
+    position: static;
     width: 90%;
-    height: 70px;
+    height: 38px;
     padding: 10px 0 10px 15px;
     font-size: x-large;
     opacity: 0.9;
-    border-top: 1px solid #b33939;
-    border-bottom: 1px solid #b33939;
     box-shadow: 10px 0 #a13333, 20px 0 #7d2727, 30px 0 #591c1c, 35px 0 white, 50ex 0 #b33939;
+}
+nav {
+    margin-top: -10px;
+    /*margin-left: -15px;*/
+    padding: 10px 0;
+    height: 38px;
 }
 
 #navmenu {
@@ -25,7 +28,7 @@
 .uk-offcanvas-bar {
     opacity: 0.95;
     background-color: #b33939;
-    box-shadow: 3px 0 #a13333, 6px 0 #7d2727, 9px 0 #591c1c;
+    box-shadow: -3px 0 #a13333, -6px 0 #7d2727, -9px 0 #591c1c;
 }
 .uk-navbar-toggle {
     padding: 0 7px;
@@ -34,11 +37,18 @@
     border-bottom: 1px solid rgba(255,255,255,.7);
 }
 
+.content {
+    min-height: calc(100vh - 70px);
+    margin-top: 10px;
+}
 .footer {
+    height: 50px;
+}
+footer {
     background-color: #b33939;
     color: #f7f1e3;
     font-size: xx-small;
-    position: absolute;
+    line-height: 15px;
     right: 0;
     bottom: 0;
     left: 0;

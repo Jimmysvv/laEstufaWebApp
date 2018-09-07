@@ -16,18 +16,24 @@
 </head>
 <body>
 <c:set var="username" value="${(empty user.name) ? 'User' : user.name}" />
-<div class="header">
+
+<%--end of this div is on footer--%>
+<div class="uk-offcanvas-content">
+
+<div class="header" uk-sticky="show-on-up: true">
 
     <nav class="uk-navbar">
-        <div class="uk-navbar-right">
+        <div class="uk-navbar-left">
             <a class="uk-navbar-toggle" href="/" uk-icon="home" id="navmenu"></a>
             <a class="uk-navbar-toggle" href="/createpost" uk-icon="plus" id="navmenu"></a>
             <a class="uk-navbar-toggle" href="/discover" uk-icon="world" id="navmenu"></a>
-            <a class="uk-navbar-toggle" uk-navbar-toggle-icon href="#offcanvas-slide" id="navmenu" uk-toggle></a>
+        </div>
+        <div class="uk-navbar-right">
+            <a class="uk-navbar-toggle" uk-navbar-toggle-icon uk-toggle="target: #push-menu" id="navmenu"></a>
         </div>
     </nav>
 
-    <div id="offcanvas-slide" uk-offcanvas>
+    <div id="push-menu" uk-offcanvas="mode: push; overlay: true; flip: true">
         <div class="uk-offcanvas-bar">
             <div class="uk-width-1-1@s uk-width-1-1@m">
                 <ul class="uk-nav-default uk-nav-parent-icon" uk-nav="multiple: false">
@@ -64,3 +70,4 @@
         </div>
     </div>
 </div>
+<div class="content">

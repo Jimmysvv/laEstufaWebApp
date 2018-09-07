@@ -3,8 +3,9 @@
 <jsp:include page="header.jsp"/>
 
 <c:set var="user" value="${(empty user) ? 'World' : user}" />
-<h2>
-    <%--Hello ${user}!--%>
+
+<h2 align="center">
+    Hello ${user}!
 </h2>
 
 <jsp:include page="footer.jsp"/>
