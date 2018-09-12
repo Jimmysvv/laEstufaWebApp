@@ -20,7 +20,7 @@ public class UserPostsController {
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     @ResponseBody
     public List<UserPostsModel> getAllUserPosts() {
-        List<UserPostsModel> a = userPostsModelRepository.findAll();
-        return a;
+        List<UserPostsModel> allPostsList = userPostsModelRepository.findAll();
+        return allPostsList;
     }
 }

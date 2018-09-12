@@ -1,0 +1,32 @@
+<div class="uk-flex-center" *ngFor="let userpost of userpostsdata" uk-grid>
+  <div class="uk-width-1-2@s uk-width-1-3@m">
+    <div class="post-block">
+      <div class="post-block-header uk-navbar">
+        <img class="post-avatar" src="https://getuikit.com/docs/images/avatar.jpg">&nbsp;
+        <div>
+          <a class="post-author">&nbsp;{{userpost.authorId}}</a>
+          <div class="post-date">&nbsp;{{userpost.date}}</div>
+        </div>
+        <a class="uk-navbar-right" href="">FOLLOW</a>
+      </div>
+      <div class="post-block-content">
+        <img *ngIf="userpost.hasImage == true" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu_sj5_lPvDiCB0jJFXCYEgfWa3V61BVmtGBohxUOHqkFJDB0U">
+        <div *ngIf="userpost.hasImage == false">{{userpost.contents}}</div>
+      </div>
+      <div class="post-block-activity uk-navbar">
+        <div class="uk-navbar-left">
+          <a uk-icon="heart"></a>
+          <span class="uk-margin-small-left">0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="userpostsdata != null; else lackOfPosts">
+  <hr class="uk-divider-icon">
+</div>
+
+<ng-template #lackOfPosts>
+  <h4 class="lackOfPosts uk-position-center">We're currently out of content for you</h4>
+</ng-template>
