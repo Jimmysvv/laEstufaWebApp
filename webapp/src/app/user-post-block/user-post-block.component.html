@@ -4,7 +4,7 @@
       <div class="post-block-header uk-navbar">
         <img class="post-avatar" src="https://getuikit.com/docs/images/avatar.jpg">&nbsp;
         <div>
-          <a class="post-author">&nbsp;{{userpost.authorId}}</a>
+          <a class="post-author" (click)="goToUser(userpost.authorId)" >&nbsp;{{userpost.authorId}}</a>
           <div class="post-date">&nbsp;{{userpost.date}}</div>
         </div>
         <a class="uk-navbar-right" href="">FOLLOW</a>
@@ -23,10 +23,10 @@
   </div>
 </div>
 
-<div *ngIf="userpostsdata != null; else lackOfPosts">
+<div *ngIf="userpostsdata.length > 0; else lackOfPosts">
   <hr class="uk-divider-icon">
 </div>
 
 <ng-template #lackOfPosts>
-  <h4 class="lackOfPosts uk-position-center">We're currently out of content for you</h4>
+  <h4 class="lackOfSth uk-position-center">We're currently out of content for you</h4>
 </ng-template>

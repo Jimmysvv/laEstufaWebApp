@@ -8,33 +8,32 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
 @Controller
+@RequestMapping(value = "/get")
 public class UserProfilePageController {
 
     @Autowired
     UserRepository userRepository;
 
-    @RequestMapping(value = "/user/{userLogin}", method = RequestMethod.GET)
-    public String getUserProfilePage (@PathVariable(value = "userLogin", required = true) String userLogin, Model model) {
+    @RequestMapping(value = "/user/{login}", method = RequestMethod.GET)
+    @ResponseBody
+    public UserModel getUserProfilePage (@PathVariable(value = "login", required = true) String login) {
 
-//        userRepository.findAll().forEach((UserModel e) -> model.addAttribute("Users", e));
+        UserModel userModel = userRepository.findUserByLogin(login);
+//        a.stream().filter(distinctByKey(e -> e.getName())).forEach(e -> b.add(e.getName()));
 
-        List<UserModel> a = (List<UserModel>) userRepository.findAll();
-        List<String> b = new ArrayList<>();
-        a.stream().filter(distinctByKey(e -> e.getName())).forEach(e -> b.add(e.getName()));
-
-        model.addAttribute("Users", userRepository.findAll());
-        model.addAttribute("names", b);
-
-        return "UserProfilePage";
+        return userModel;
     }
 
     private static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {

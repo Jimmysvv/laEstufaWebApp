@@ -1,0 +1,9 @@
+<div *ngIf="userData !== null ; else lackOfUser">
+ <h4>
+   hello {{userData.name}} {{userData.lastName}}
+ </h4>
+</div>
+
+<ng-template #lackOfUser>
+  <h4 class="lackOfSth uk-position-center">User {{userlogin}} does not exists</h4>
+</ng-template>

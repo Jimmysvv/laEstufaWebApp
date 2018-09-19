@@ -15,7 +15,7 @@ public class HomePageController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getWelcomePage (Model model) {
         model.addAttribute("title", "Home Page");
-        model.addAttribute("userPosts", userPostsController.getAllUserPosts());
+        //model.addAttribute("userPosts", userPostsController.getAllUserPosts());
         return "HomePage";
     }
 }

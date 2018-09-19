@@ -7,10 +7,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class LoginPageController {
 
-
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String getLoginPage() {
-        return "LoginPage";
-    }
+//    @RequestMapping(value = "/login", method = RequestMethod.GET)
+//    public String getLoginPage() {
+//        return "LoginPage";
+//    }
 
 }

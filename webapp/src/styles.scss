@@ -55,6 +55,9 @@ nav {
 .footer {
   height: 50px;
 }
+.footer a:hover {
+  color: #591c1c;
+}
 footer {
   background-color: #b33939;
   color: #f7f1e3;
@@ -126,6 +129,16 @@ a:hover {
   color: #b33939;
 }
 
-.lackOfPosts{
+.lackOfSth{
   color: #D1D1D1;
+  text-align: center;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;  /* Non-prefixed, Chrome and Opera */
 }
