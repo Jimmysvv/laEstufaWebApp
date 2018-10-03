@@ -2,6 +2,7 @@ package com.laestufa.laEstufa.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "usermodel")
@@ -13,11 +14,31 @@ public class UserModel {
 
     private String Name;
     private String LastName;
-    private Integer Age;
-
+    private int Active;
     private String Login;
     private String Email;
     private Date BirthDay;
+    private String Password;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role", joinColumns =
+    @JoinColumn(name = "id"), inverseJoinColumns =
+    @JoinColumn(name = "role_id"))
+    private Set<RoleModel> roles;
+
+    public UserModel() {
+    }
+
+    public UserModel(UserModel userModel) {
+        this.Name = userModel.Name;
+        this.LastName = userModel.LastName;
+        this.Login = userModel.Login;
+        this.Active = userModel.Active;
+        this.Email = userModel.Email;
+        this.BirthDay = userModel.BirthDay;
+        this.Password = userModel.Password;
+        this.roles = userModel.roles;
+    }
 
     public String getLogin() {
         return Login;
@@ -51,6 +72,14 @@ public class UserModel {
         this.id = id;
     }
 
+    public int getActive() {
+        return Active;
+    }
+
+    public void setActive(int active) {
+        Active = active;
+    }
+
     public String getName() {
         return Name;
     }
@@ -67,11 +96,19 @@ public class UserModel {
         LastName = lastName;
     }
 
-    public Integer getAge() {
-        return Age;
+    public String getPassword() {
+        return Password;
     }
 
-    public void setAge(Integer age) {
-        Age = age;
+    public void setPassword(String password) {
+        Password = password;
+    }
+
+    public Set<RoleModel> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<RoleModel> roles) {
+        this.roles = roles;
     }
 }

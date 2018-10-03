@@ -10,6 +10,9 @@ import { UserPostBlockComponent } from './user-post-block/user-post-block.compon
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { CreateNewPostComponent } from './create-new-post/create-new-post.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import {environment} from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     UserPostBlockComponent,
     LoginComponent,
     RegisterComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    CreateNewPostComponent
   ],
   imports: [
     BrowserModule,
@@ -34,14 +38,19 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
         component: RegisterComponent
       },
       {
-        path: 'login',
+        path: 'singin',
         component: LoginComponent
+      },
+      {
+        path: 'create',
+        component: CreateNewPostComponent
       },
       {
         path: '',
         component: UserPostBlockComponent
       }
-    ])
+    ]),
+    ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production})
   ],
   providers: [],
   bootstrap: [AppComponent, HeaderComponent, FooterComponent]

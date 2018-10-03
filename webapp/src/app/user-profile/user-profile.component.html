@@ -1,6 +1,6 @@
-<div *ngIf="userData !== null ; else lackOfUser">
+<div *ngIf="userData.hasOwnProperty('name'); else lackOfUser">
  <h4>
-   hello {{userData.name}} {{userData.lastName}}
+   hello {{userData.name}} {{userData.last_name}}
  </h4>
 </div>
 

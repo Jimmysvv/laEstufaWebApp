@@ -6,10 +6,6 @@ import java.util.Date;
 
 @Entity
 @Table(name = "user_posts")
-@NamedStoredProcedureQuery(
-        name = "getAllUserPost",
-        procedureName = "getAllUserPost"
-)
 public class UserPostsModel {
 
     @Id

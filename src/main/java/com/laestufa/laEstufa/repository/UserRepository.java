@@ -1,13 +1,22 @@
 package com.laestufa.laEstufa.repository;
 
+import com.laestufa.laEstufa.model.JwtUser;
 import com.laestufa.laEstufa.model.UserModel;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-public interface UserRepository extends CrudRepository<UserModel,Long> {
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Stream;
 
-    @Query(value = "SELECT u.* FROM UserModel u WHERE u.login = :login", nativeQuery = true)
-    UserModel findUserByLogin(@Param("login") String login);
+public interface UserRepository extends JpaRepository<UserModel,Long> {
 
+    @Query(value = "CALL getBasicUserDetail(:login)", nativeQuery = true)
+    Map findUserByLogin(@Param("login") String login);
+
+    @Query(value = "CALL getJwtUserDetail(:email)", nativeQuery = true)
+    Map getJwtUserDetail(@Param("email") String email);
+
+//    Optional<UserModel> findByName(String username);
 }
