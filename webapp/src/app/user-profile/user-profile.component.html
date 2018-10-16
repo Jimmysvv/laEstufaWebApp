@@ -1,7 +1,27 @@
 <div *ngIf="userData.hasOwnProperty('name'); else lackOfUser">
- <h4>
-   hello {{userData.name}} {{userData.last_name}}
- </h4>
+  <div class="uk-flex uk-flex-center">
+    <div class="uk-card uk-card-default uk-width-1-2@s uk-width-1-3@m">
+      <div class="uk-card-header">
+        <div class="uk-grid-small uk-flex-middle" uk-grid>
+          <div class="uk-width-auto">
+            <img class="uk-border-circle" width="40" height="40" src="https://getuikit.com/docs/images/avatar.jpg">&nbsp;
+          </div>
+          <div class="uk-width-expand">
+            <h3 class="uk-card-title uk-text-bottom uk-margin-remove-bottom">{{userData.login}}</h3>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="userProfileDetails === true" class="uk-card-footer">
+        <div class="userProfileDetails">
+          <b>{{userData.name}} {{userData.last_name}}</b><br>
+          {{userData.description}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="userPosts">
+    <app-user-post-block><div class="uk-position-center" uk-spinner></div></app-user-post-block>
+  </div>
 </div>
 
 <ng-template #lackOfUser>

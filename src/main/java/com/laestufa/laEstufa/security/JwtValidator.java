@@ -9,7 +9,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class JwtValidator {
 
-    private String secret = "siema";
+    private static final String ENCODED_GENERATION_CODE = "superUltraHardToBreakPasswordForDecode";
+
     protected final Logger log = Logger.getLogger(getClass());
 
     public JwtUser validate(String token) {
@@ -18,13 +19,14 @@ public class JwtValidator {
 
         try {
             Claims body = Jwts.parser()
-                    .setSigningKey(secret)
+                    .setSigningKey(ENCODED_GENERATION_CODE)
                     .parseClaimsJws(token)
                     .getBody();
 
             jwtUser = new JwtUser();
 
             jwtUser.setUserName(body.getSubject());
+            jwtUser.setUserLogin((String) body.get("userLogin"));
             jwtUser.setId((String) body.get("userId"));
             jwtUser.setRole((String) body.get("role"));
         } catch (Exception e) {

@@ -2,6 +2,7 @@ package com.laestufa.laEstufa.model;
 
 public class JwtUser {
     private String userName;
+    private String userLogin;
     private String id;
     private String role;
 
@@ -11,6 +12,14 @@ public class JwtUser {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public String getUserLogin() {
+        return userLogin;
+    }
+
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
     }
 
     public String getId() {

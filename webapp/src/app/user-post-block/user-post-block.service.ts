@@ -7,7 +7,11 @@ export class UserPostBlockService {
   constructor(private _http: HttpClient) { }
 
   getAllUserPosts() {
-    return this._http.get('/get/all');
+    return this._http.get('/give/all');
   }
 
+  getAllCurrentUserPosts(login: string) {
+    let url = '/give/all/' + login;
+    return this._http.get(url);
+  }
 }

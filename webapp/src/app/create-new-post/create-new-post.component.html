@@ -1,4 +1,61 @@
-<form (submit)="createNewPost($event)">
-  <input type="text" placeholder="contents" id="contents">
-  <input type="submit" value="elo"/>
-</form>
+<div class="uk-flex-center uk-child-width-1-2@s uk-child-width-1-3@xl" uk-grid>
+  <div class="create-post">
+    <div uk-grid>
+      <div class="uk-width-auto@m">
+        <ul class="uk-tab-left uk-navbar" uk-tab="connect: #tab;">
+          <li class="uk-active">
+            <a href="#picture" (click)="clearW($event)">
+              <span uk-icon="camera"></span>
+              <span class="uk-margin-small-left">Picture</span>
+            </a>
+          </li>
+          <li class="uk-active">
+            <a href="#write" (click)="clearP($event)">
+              <span uk-icon="quote-right"></span>
+              <span class="uk-margin-small-left">Write</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="uk-width-expand@m">
+        <ul id="tab" class="uk-switcher">
+          <li id="picture">
+            <form #formP (submit)="createNewPost($event)">
+              <div [hidden]="url.length > 0" class="ejs-upload uk-placeholder uk-text-center">
+                <span uk-icon="icon: cloud-upload"></span>
+                <span class="uk-text-middle">&nbsp;Drop picture here or</span>
+                <div uk-form-custom>
+                  <input type="file" accept="image/*" (change)="onSelectFile($event)">
+                  <span class="uk-link">&nbsp;select one</span>
+                </div>
+              </div>
+              <div [hidden]="url.length <= 0" align="center" class="uk-card uk-card-default uk-card-body uk-padding-remove">
+                <img #liveimg [src]="url">
+              </div>
+              <div [hidden]="url.length <= 0" class="uk-text-center">
+                <div class="post-block-activity">
+                  <button class="uk-button uk-button-default uk-width-1-3" (click)="clearP($event)">Remove</button>
+                  <div class="uk-button uk-button-default uk-width-1-3 uk-form-custom">
+                    <input type="file" accept="image/*" (change)="onSelectFile($event)">
+                    <span>Change</span>
+                  </div>
+                  <button class="uk-button uk-button-default uk-width-1-3">Submit</button>
+                </div>
+              </div>
+            </form>
+          </li>
+          <li id="write">
+            <form #formW (submit)="createNewPost($event)">
+              <div class="post-block-content">
+                <textarea class="uk-textarea" rows="7" placeholder="Right here!" value="" maxlength="150" id="contents"></textarea>
+              </div>
+              <div class="post-block-activity">
+                <button class="uk-button uk-button-default uk-width-1-1">Submit</button>
+              </div>
+            </form>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

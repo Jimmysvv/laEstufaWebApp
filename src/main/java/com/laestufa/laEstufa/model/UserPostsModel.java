@@ -2,6 +2,7 @@ package com.laestufa.laEstufa.model;
 
 
 import javax.persistence.*;
+import java.sql.Blob;
 import java.util.Date;
 
 @Entity
@@ -15,7 +16,7 @@ public class UserPostsModel {
     private String Contents;
     private String AuthorId;
     private Date Date;
-    private boolean HasImage;
+    private String Image;
 
     public Integer getId() {
         return id;
@@ -49,11 +50,11 @@ public class UserPostsModel {
         Date = date;
     }
 
-    public boolean isHasImage() {
-        return HasImage;
+    public String getImage() {
+        return Image;
     }
 
-    public void setHasImage(boolean hasImage) {
-        HasImage = hasImage;
+    public void setImage(String image) {
+        Image = image;
     }
 }

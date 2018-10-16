@@ -25,10 +25,11 @@
     {
       "name": "userPosts",
       "urls": [
-        "http://localhost:4200/get/all"
+        "http://localhost:4200/give/all",
+        "http://localhost:4200/loginStatus"
       ],
       "cacheConfig": {
-        "maxSize": 1,
+        "maxSize": 5,
         "maxAge": "1h",
         "timeout": "5s",
         "strategy": "freshness"

@@ -19,6 +19,7 @@ public class UserModel {
     private String Email;
     private Date BirthDay;
     private String Password;
+    private String Description;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_role", joinColumns =
@@ -38,6 +39,7 @@ public class UserModel {
         this.BirthDay = userModel.BirthDay;
         this.Password = userModel.Password;
         this.roles = userModel.roles;
+        this.Description = userModel.Description;
     }
 
     public String getLogin() {
@@ -110,5 +112,13 @@ public class UserModel {
 
     public void setRoles(Set<RoleModel> roles) {
         this.roles = roles;
+    }
+
+    public String getDescription() {
+        return Description;
+    }
+
+    public void setDescription(String description) {
+        Description = description;
     }
 }

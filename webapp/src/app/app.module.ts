@@ -13,6 +13,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { CreateNewPostComponent } from './create-new-post/create-new-post.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import {environment} from '../environments/environment';
+import {AuthGuard} from './auth.guard';
+import {AuthService} from './auth.service';
 
 @NgModule({
   declarations: [
@@ -38,12 +40,28 @@ import {environment} from '../environments/environment';
         component: RegisterComponent
       },
       {
-        path: 'singin',
+        path: 'signin',
         component: LoginComponent
       },
       {
         path: 'create',
-        component: CreateNewPostComponent
+        component: CreateNewPostComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'discover',
+        component: UserPostBlockComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'edit',
+        component: UserPostBlockComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'settings',
+        component: UserPostBlockComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: '',
@@ -52,7 +70,7 @@ import {environment} from '../environments/environment';
     ]),
     ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production})
   ],
-  providers: [],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent, HeaderComponent, FooterComponent]
 })
 export class AppModule { }

@@ -99,7 +99,7 @@ img {
 
 //for debug purposes
 div {
-  /*border: 1px solid red;*/
+  //border: 1px solid red;
 }
 
 a:hover {
@@ -129,9 +129,27 @@ a:hover {
   color: #b33939;
 }
 
-.lackOfSth{
+.create-post {
+  margin: 0 15px;
+}
+
+textarea {
+  resize: none;
+}
+
+.lackOfSth {
   color: #D1D1D1;
   text-align: center;
+}
+
+.position-staic {
+  position: static;
+}
+.userPosts {
+  padding-top: 20px;
+}
+.userProfileDetails {
+  font-size: small;
 }
 
 .noselect {

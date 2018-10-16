@@ -16,8 +16,11 @@
     </div>
   </div>
   <div class="uk-card-footer">
+    <div *ngIf="myErrorMessage" class="uk-alert-danger" uk-alert>
+      <a class="uk-alert-close" uk-close></a>
+      <p>{{myErrorMessageVal}}</p>
+    </div>
     <input type="submit" id="submit" class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom" value="login"/>
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
   </div>
 </div>
 

@@ -9,7 +9,7 @@ export class UserProfileService {
   constructor(private _http: HttpClient) { }
 
   getUserData(login: string) {
-    let url = '/get/user/' + login;
+    let url = '/give/user/' + login;
     return this._http.get(url);
   }
 }

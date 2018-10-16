@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+
+interface response {
+  message: string;
+  success: boolean;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -8,14 +13,25 @@ export class CreateNewPostService {
 
   constructor(private _http: HttpClient) { }
 
-  createNewPost(contents, authorId, date, hasImage) {
-    this._http.post('/get/create', {
+  httpOptions = {
+    headers: new HttpHeaders({
+      // 'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('Token'),
+      'Session': localStorage.getItem('Session'),
+      'UserId': localStorage.getItem('UserId')
+    })
+  };
+
+  createNewPost(contents, authorId, date, image) {
+    return this._http.post<response>('/get/post/create', {
       contents,
       authorId,
       date,
-      hasImage
-    }).subscribe(data => {
-      console.log('response: ', data);
-    });
+      image
+    }, this.httpOptions);
+  }
+
+  uploadFile(file) {
+    return this._http.post<response>('/get/post/upload', file, this.httpOptions);
   }
 }

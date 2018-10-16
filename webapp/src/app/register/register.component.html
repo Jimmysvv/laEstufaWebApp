@@ -1,3 +1,40 @@
-<p>
-  register works!
-</p>
+<form (submit)="doRegisterNewUser($event)" class="uk-position-center">
+
+  <div class="uk-card uk-card-default uk-card-large">
+    <div class="uk-card-body">
+      <div class="uk-margin">
+        <div class="uk-inline">
+          <span class="uk-form-icon" uk-icon="icon: user"></span>
+          <input type="text" class="uk-input" id="login" placeholder="Login">
+        </div>
+      </div>
+      <div class="uk-margin">
+        <div class="uk-inline">
+          <span class="uk-form-icon" uk-icon="icon: mail"></span>
+          <input type="text" class="uk-input" id="email" placeholder="Email">
+        </div>
+      </div>
+      <div class="uk-margin">
+        <div class="uk-inline">
+          <span class="uk-form-icon" uk-icon="icon: lock"></span>
+          <input type="password" class="uk-input" id="password" placeholder="Password">
+        </div>
+      </div>
+      <div class="uk-margin">
+        <div class="uk-inline">
+          <span class="uk-form-icon" uk-icon="icon: lock"></span>
+          <input type="password" class="uk-input" id="confirmation" placeholder="Confirm password">
+        </div>
+      </div>
+      <div class="uk-margin">
+        <div class="uk-inline">
+            <label><input type="radio" class="uk-radio" id="rodo"> RODO</label>
+        </div>
+      </div>
+    </div>
+    <div class="uk-card-footer">
+      <input type="submit" id="submit" class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom" value="register"/>
+    </div>
+  </div>
+
+</form>
