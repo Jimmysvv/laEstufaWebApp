@@ -1,0 +1,83 @@
+<form (submit)="editUserProfile($event)" class="uk-padding-small">
+  <div class="uk-grid uk-child-width-1-1" align="center">
+    <!--<div class="">-->
+    <div class="uk-margin-small">
+      <div class="uk-inline uk-width-1-2@s uk-width-1-2@m uk-width-1-3@l">
+        <img [src]="avatar" class="uk-border-circle" height="100" width="100">
+        <a href="#modal-center" class="uk-position-bottom uk-margin-xlarge-left" uk-toggle>
+          <span class="uk-icon-button" uk-icon="plus-circle" ></span>
+        </a>
+        <div id="modal-center" class="uk-flex-top" uk-modal>
+          <div class="uk-modal-dialog uk-margin-auto-vertical">
+            <div class="uk-modal-body" align="center">
+              <button #closeMe class="uk-modal-close-default" type="button" uk-close></button>
+              <div class="js-upload" uk-form-custom>
+                <input type="file" accept="image/*" (change)="fileChangeEvent($event)">
+                <button class="uk-button uk-button-default" type="button" tabindex="-1">Choose</button>
+              </div>
+
+              <image-cropper [hidden]="!imageChangedEvent"
+                [imageChangedEvent]="imageChangedEvent"
+                [maintainAspectRatio]="true"
+                [aspectRatio]="1 / 1"
+                format="png"
+                (imageCropped)="imageCropped($event)"
+                (loadImageFailed)="loadImageFailed()"></image-cropper>
+
+              <img [hidden]="!croppedImage" [src]="croppedImage" height="250" width="250" class="uk-border-circle">
+            </div>
+            <div class="uk-modal-footer" [hidden]="!croppedImage">
+              <button class="uk-button uk-button-default uk-width-1-1 uk-modal-close" type="button" (click)="submitNewAvatar($event)">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="uk-margin-small">
+        <div class="uk-inline uk-width-1-1@s uk-width-1-2@m uk-width-1-3@l">
+          <span class="uk-form-icon" uk-icon="icon: user"></span>
+          <input type="text" class="uk-input " id="login" placeholder="Login" (change)="loger($event)" value="{{login}}">
+        </div>
+      </div>
+      <div class="uk-margin-small">
+        <div class="uk-inline uk-width-1-1@s uk-width-1-2@m uk-width-1-3@l">
+          <span class="uk-form-icon" uk-icon="icon: mail"></span>
+          <input type="text" class="uk-input" id="email" placeholder="Email" value="{{email}}">
+        </div>
+      </div>
+      <div class="uk-margin-small">
+        <div class="uk-inline uk-width-1-1@s uk-width-1-2@m uk-width-1-3@l">
+          <span class="uk-form-icon" uk-icon="icon: chevron-right"></span>
+          <input type="text" class="uk-input" id="name" placeholder="Name" value="{{name}}">
+        </div>
+      </div>
+      <div class="uk-margin-small">
+        <div class="uk-inline uk-width-1-1@s uk-width-1-2@m uk-width-1-3@l">
+          <span class="uk-form-icon" uk-icon="icon: chevron-right"></span>
+          <input type="text" class="uk-input" id="lastName" placeholder="Last name" value="{{lastName}}">
+        </div>
+      </div>
+      <div class="uk-margin-small">
+          <textarea class="uk-textarea uk-width-1-1@s uk-width-1-2@m uk-width-1-3@l" id="description"
+                    rows="3" placeholder="Description" value="{{description}}" maxlength="50"></textarea>
+      </div>
+      <div class="uk-margin-small">
+        <div class="uk-inline uk-width-1-1@s uk-width-1-2@m uk-width-1-3@l">
+          <span class="uk-form-icon" uk-icon="icon: calendar"></span>
+          <input type="date" class="uk-input" data-uk-datepicker="{format:'DD.MM.YYYY'}" id="birthDay" value="{{birthDay}}">
+        </div>
+      </div>
+      <div class="uk-margin-small">
+        <div class="uk-inline uk-width-1-1@s uk-width-1-2@m uk-width-1-3@l">
+          <label><input type="checkbox" class="uk-checkbox" id="isPrivate" [checked]="isPrivate" (change)="loger($event)">&nbsp;Private account</label>&nbsp;
+          <label hidden><input type="checkbox" class="uk-checkbox" id="enableMat" value="{{enableMat}}">&nbsp;<b>+18</b></label>
+        </div>
+      </div>
+    <!--</div>-->
+    <div class="uk-margin-small">
+      <div class="uk-inline uk-width-1-1@s uk-width-1-2@m uk-width-1-3@l">
+        <input type="submit" id="submit" class="uk-button uk-button-default uk-width-1-1" value="save changes"/>
+      </div>
+    </div>
+  </div>
+</form>

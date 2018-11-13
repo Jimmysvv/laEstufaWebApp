@@ -1,0 +1,76 @@
+<div class="uk-grid uk-child-width-1-1">
+  <form class="uk-search uk-search-default">
+    <div class="uk-margin uk-padding-small" align="center">
+      <div class="uk-inline uk-width-1-1@s uk-width-1-2@s uk-width-1-3@m">
+        <span class="uk-form-icon" uk-search-icon></span>
+        <input #search id="search" class="uk-search-input" maxlength="25" type="search" placeholder="Search...">
+      </div>
+    </div>
+  </form>
+  <div [hidden]="!resultArea" align="center">
+    <div class="uk-padding-small">
+      <div class="uk-width-1-1@s uk-width-1-2@s uk-width-1-3@m">
+        <ul #obsTab class="uk-navbar"  uk-tab="connect: #search-tab;">
+          <li class="uk-active">
+            <a href="#people">
+              <span uk-icon="users"></span>
+              <span class="uk-margin-small-left">People</span>
+            </a>
+          </li>
+          <li class="uk-active">
+            <a href="#tag">
+              <span uk-icon="hashtag"></span>
+              <span class="uk-margin-small-left">Tag</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="uk-width-expand@m">
+        <ul id="search-tab" class="uk-switcher">
+          <li id="people">
+            <div class="uk-margin-remove">
+              <div class="uk-inline uk-width-1-1@s uk-width-1-2@s uk-width-1-3@m">
+                <div [hidden]="!showSpinner" class="uk-position-center" uk-spinner></div>
+                <h4 [hidden]="!showError" class="lackOfSth uk-margin-remove">No users found</h4>
+                <table [hidden]="showError" class="uk-table uk-table-small uk-margin-remove">
+                  <tbody *ngIf="type == 'people'">
+                    <tr *ngFor="let result of searchData">
+                      <td *ngIf="result.avatar">
+                        <img class="uk-preserve-width uk-border-circle" [src]="atob(result.avatar)" width="40" alt="">&nbsp;
+                        <a [routerLink]="'../user/' + result.login">{{result.login}}</a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </li>
+          <li id="tag">
+            <div class="uk-margin-remove">
+              <div class="uk-inline uk-width-1-1@s uk-width-1-2@s uk-width-1-3@m">
+                <div [hidden]="!showSpinner" class="uk-position-center" uk-spinner></div>
+                <h4 [hidden]="!showError" class="lackOfSth uk-margin-remove">No tags found</h4>
+                <div [hidden]="showError" class="uk-margin-remove">
+                  <ul class="uk-child-width-1-3 uk-grid-collapse" uk-grid="masonry: true" *ngIf="type == 'tag'">
+                    <li class="br-border" *ngFor="let result of searchData">
+                      <div *ngIf="!result.image">
+                        {{result.contents.substring(0, 15)}}&nbsp;
+                        <a [routerLink]="'/posts/' + result.id">Read more...</a>
+                      </div>
+                      <div *ngIf="result.image">
+                        <a [routerLink]="'/posts/' + result.id">
+                          <img [src]="atob(result.image)" alt="">
+                        </a>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<hr class="uk-divider-icon uk-margin-remove"><br>

@@ -16,7 +16,7 @@
   height: 38px;
   padding: 0px 15px 10px 15px;
   font-size: medium;
-  opacity: 0.9;
+  //opacity: 0.95;
   //box-shadow: 10px 0 #a13333, 20px 0 #7d2727, 30px 0 #591c1c, 35px 0 white, 50ex 0 #b33939;
 }
 
@@ -150,6 +150,12 @@ textarea {
 }
 .userProfileDetails {
   font-size: small;
+}
+
+.br-border {
+  background-color: #F5F5F5;
+  border-bottom: 5px solid white;
+  border-right: 5px solid white;
 }
 
 .noselect {

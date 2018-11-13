@@ -19,7 +19,10 @@ public class UserModel {
     private String Email;
     private Date BirthDay;
     private String Password;
+    private String Avatar;
     private String Description;
+    private Boolean IsPrivate;
+    private Boolean EnableMat;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_role", joinColumns =
@@ -39,7 +42,10 @@ public class UserModel {
         this.BirthDay = userModel.BirthDay;
         this.Password = userModel.Password;
         this.roles = userModel.roles;
+        this.Avatar = userModel.Avatar;
         this.Description = userModel.Description;
+        this.IsPrivate = userModel.IsPrivate;
+        this.EnableMat = userModel.EnableMat;
     }
 
     public String getLogin() {
@@ -114,11 +120,35 @@ public class UserModel {
         this.roles = roles;
     }
 
+    public String getAvatar() {
+        return Avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        Avatar = avatar;
+    }
+
     public String getDescription() {
         return Description;
     }
 
     public void setDescription(String description) {
         Description = description;
+    }
+
+    public Boolean getPrivate() {
+        return IsPrivate;
+    }
+
+    public void setPrivate(Boolean aPrivate) {
+        IsPrivate = aPrivate;
+    }
+
+    public Boolean getEnableMat() {
+        return EnableMat;
+    }
+
+    public void setEnableMat(Boolean enableMat) {
+        EnableMat = enableMat;
     }
 }

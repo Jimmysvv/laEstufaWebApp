@@ -1,4 +1,4 @@
-<div class="header" uk-sticky="show-on-up: true">
+<div class="header" uk-sticky>
 
   <nav class="uk-navbar">
     <div class="uk-navbar-left">
@@ -25,12 +25,13 @@
                 </a>
               </li>
               <li>
-                <a routerLink="/search">
+                <!--<a routerLink="/discover" [queryParams]="{ search: 'true'}">-->
+                <a routerLink="/search/dupa">
                   <span uk-icon="search"></span><span class="uk-margin-small-left">Search</span>
                 </a>
               </li>
               <li>
-                <a routerLink="/edit">
+                <a routerLink="/edit/{{userLogin}}">
                   <span uk-icon="settings"></span><span class="uk-margin-small-left">Preferences</span>
                 </a>
               </li>

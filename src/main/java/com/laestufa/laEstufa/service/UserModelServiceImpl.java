@@ -7,7 +7,10 @@ import com.sun.istack.internal.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class UserModelServiceImpl implements UserModelService {
@@ -67,4 +70,39 @@ public class UserModelServiceImpl implements UserModelService {
     public boolean checkUserLoginStatus(String id, String token, String userId) {
         return userRepository.checkUserLoginStatus(id, token, userId);
     }
+
+    @Override
+    public boolean updateUserProfile(String userId, String column, String value) {
+        String changedColumn = changeUpperCamelCase(column);
+        return userRepository.updateUserProfile(userId, changedColumn, value);
+    }
+
+    @Override
+    public String changeUpperCamelCase(String changeVar) {
+        final String regex = "(?=[A-Z][a-z])";
+        final String subst = "_";
+
+        final Pattern pattern = Pattern.compile(regex);
+        final Matcher matcher = pattern.matcher(changeVar);
+
+        final String result = matcher.replaceAll(subst);
+
+        return result.substring(1).toLowerCase();
+    }
+
+    @Override
+    public Map getPersonalUserDetail(String login) {
+        return userRepository.getPersonalUserDetail(login);
+    }
+
+    @Override
+    public List<Map> getSearchResult(String user) {
+        return userRepository.getSearchResult(user);
+    }
+
+    @Override
+    public List<Map> getSearchTagResult(String tag) {
+        return userRepository.getSearchTagResult(tag);
+    }
+
 }

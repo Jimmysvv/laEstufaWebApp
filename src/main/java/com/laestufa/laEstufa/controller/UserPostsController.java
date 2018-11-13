@@ -30,14 +30,20 @@ public class UserPostsController {
 
     @RequestMapping(value = "/give/all", method = RequestMethod.GET)
     @ResponseBody
-    public List<Map> getAllUserPosts() {
+    public List<Map> findAllPosts() {
         return userPostsService.findAllPosts();
     }
 
     @RequestMapping(value = "/give/all/{login}", method = RequestMethod.GET)
     @ResponseBody
-    public List<Map> getAllUserPosts(@PathVariable("login") String login) {
+    public List<Map> findAllUserPosts(@PathVariable("login") String login) {
         return userPostsService.findAllUserPosts(login);
+    }
+
+    @RequestMapping(value = "/give/current/{postId}", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Map> getCurrentUserPosts(@PathVariable("postId") String postId) {
+        return userPostsService.getCurrentUserPosts(postId);
     }
 
     @RequestMapping(value = "/get/post/create", method = RequestMethod.POST)

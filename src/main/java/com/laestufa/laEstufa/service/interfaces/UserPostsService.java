@@ -20,4 +20,6 @@ public interface UserPostsService {
     String getNewFileName(String fileName);
 
     boolean uploadFile(MultipartFile file, String fullName);
+
+    List<Map> getCurrentUserPosts(String postId);
 }
