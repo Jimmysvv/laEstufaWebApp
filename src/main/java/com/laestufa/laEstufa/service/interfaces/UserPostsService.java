@@ -22,4 +22,6 @@ public interface UserPostsService {
     boolean uploadFile(MultipartFile file, String fullName);
 
     List<Map> getCurrentUserPosts(String postId);
+
+    List<Map> getAllFollowingPosts(String userId);
 }

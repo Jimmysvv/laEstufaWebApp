@@ -3,7 +3,6 @@ package com.laestufa.laEstufa.controller;
 import com.laestufa.laEstufa.model.UserModel;
 import com.laestufa.laEstufa.service.interfaces.UserModelService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,14 +11,13 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-@Controller
+@RestController
 public class UserProfilePageController {
 
     @Autowired
     private UserModelService userModelService;
 
     @RequestMapping(value = "/loginStatus", method = RequestMethod.GET)
-    @ResponseBody
     public Map checkUserLoginStatus(@RequestHeader("Authorization") String token,
                                     @RequestHeader("Session") String session,
                                     @RequestHeader("UserId") String userId) {
@@ -35,7 +33,6 @@ public class UserProfilePageController {
     }
 
     @RequestMapping(value = "/get/logout", method = RequestMethod.GET)
-    @ResponseBody
     public Map doLogout(@RequestHeader("Authorization") String token,
                         @RequestHeader("Session") String session) {
         boolean res = false;
@@ -50,14 +47,12 @@ public class UserProfilePageController {
     }
 
     @RequestMapping(value = "/give/user/{login}", method = RequestMethod.GET)
-    @ResponseBody
     public Map getUserByLogin(@PathVariable(value = "login", required = true) String login) {
 //        a.stream().filter(distinctByKey(e -> e.getName())).forEach(e -> b.add(e.getName()));
         return userModelService.findUserByLogin(login);
     }
 
     @RequestMapping(value = "/get/user/{login}", method = RequestMethod.GET)
-    @ResponseBody
     public Map getPersonalUserDetail(@PathVariable(value = "login", required = true) String login,
                                   @RequestHeader("Authorization") String token,
                                   @RequestHeader("Session") String session,
@@ -70,7 +65,6 @@ public class UserProfilePageController {
     }
 
     @RequestMapping(value = "/get/user/edit", method = RequestMethod.POST)
-    @ResponseBody
     public Map editUserProfile(@RequestBody UserModel newUserData,
                                @RequestHeader("Authorization") String token,
                                @RequestHeader("Session") String session,
@@ -97,7 +91,6 @@ public class UserProfilePageController {
     }
 
     @RequestMapping(value = "/get/searching/{type}", method = RequestMethod.GET)
-    @ResponseBody
     public List<Map> getSearchResult(@PathVariable(value = "type", required = true) String type,
                                      @RequestHeader("value") String value) {
         List<Map> resultList = new ArrayList<>();

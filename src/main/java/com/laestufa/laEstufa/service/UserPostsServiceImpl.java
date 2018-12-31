@@ -72,4 +72,9 @@ public class UserPostsServiceImpl implements UserPostsService {
     public List<Map> getCurrentUserPosts(String postId) {
         return userPostsModelRepository.getCurrentUserPosts(postId);
     }
+
+    @Override
+    public List<Map> getAllFollowingPosts(String userId) {
+        return userPostsModelRepository.getAllFollowingPosts(userId);
+    }
 }

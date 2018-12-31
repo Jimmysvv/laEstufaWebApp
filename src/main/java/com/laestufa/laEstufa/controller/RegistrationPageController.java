@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@Controller
+@RestController
 @RequestMapping(value = "/register")
 public class RegistrationPageController {
 
@@ -19,7 +19,6 @@ public class RegistrationPageController {
     private UserModelService userModelService;
 
     @RequestMapping(value = "/new/user", method = RequestMethod.POST)
-    @ResponseBody
     public String addNewUser(@RequestBody UserModel user,
                              @RequestHeader("Register") boolean header) {
 

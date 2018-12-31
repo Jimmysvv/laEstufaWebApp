@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { UserPostBlockService } from './user-post-block.service';
+import {Component, OnInit} from '@angular/core';
+import {UserPostBlockService} from './user-post-block.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {AuthService} from '../auth.service';
+import {FollowingService} from '../following/following.service';
 
 @Component({
   selector: 'app-user-post-block',
@@ -14,42 +16,62 @@ export class UserPostBlockComponent implements OnInit {
   userPostsData: any = null;
   showSpinner: boolean;
   showError: boolean;
+  loggedIn: boolean;
   postId: string;
+  usersIdList: any = [];
+  errorMessage = 'We\'re currently out of content for you.';
 
   constructor(private _userPostService: UserPostBlockService,
+              private _followingService: FollowingService,
               private _route: ActivatedRoute,
-              private _router: Router) {
+              private _router: Router,
+              private _auth: AuthService) {
     _route.params.subscribe(val => {
       this.showSpinner = true;
       const login = this._route.snapshot.paramMap.get('login');
       this.userlogin = login !== null ? login : '';
       const postId = this._route.snapshot.paramMap.get('postId');
       this.postId = postId !== null ? postId : '';
+      const userId = localStorage.getItem('UserId');
+      this.loggedIn = !!(userId || this._auth.isLoggedIn);
       if (this.userlogin) {
         this._userPostService.getAllCurrentUserPosts(login).subscribe(data => {
-          this.showSpinner = false;
-          this.userPostsData = data;
+          this.success(data);
         }, () => {
-          this.showSpinner = false;
-          this.showError = true;
+          this.error();
           });
       } else if (this.postId) {
         this._userPostService.getCurrentUserPosts(postId).subscribe(data => {
-          this.showSpinner = false;
-          this.userPostsData = data;
+          this.success(data);
         }, () => {
-          this.showSpinner = false;
-          this.showError = true;
+          this.error();
         });
-      } else {
+      } else if (!this.loggedIn || this._router.url === '/discover') {
         this._userPostService.getAllUserPosts().subscribe(data => {
-          this.showSpinner = false;
-          this.userPostsData = data;
+          this.success(data);
         }, () => {
+          this.error();
+        });
+      } else if (this.loggedIn) {
+        this._userPostService.getAllFollowingPosts(userId).subscribe(data => {
           this.showSpinner = false;
-          this.showError = true;
+          if (data.length === 0 || !data[0].hasOwnProperty('login')) {
+            this.errorMessage = 'There\'s no post. Follow someone with content.';
+            this.showError = true;
+          } else {
+            this.success(data);
+          }
+        }, () => {
+          this.error();
         });
       }
+      this._followingService.getUserFollowing(localStorage.getItem('UserId')).subscribe(data => {
+        const list = [];
+        for (const self of data) {
+          list.push(self.following);
+        }
+        localStorage.setItem('following', list.toString());
+      });
     });
   }
 
@@ -61,6 +83,20 @@ export class UserPostBlockComponent implements OnInit {
 
   atob(url) {
     return atob(url);
+  }
+
+  success(data: any) {
+    this.showSpinner = false;
+    this.userPostsData = data;
+    data.forEach(a => {
+      this.usersIdList.push(a.author_id);
+    });
+    this.usersIdList = this.usersIdList.filter((x, i, a) => a.indexOf(x) === i);
+  }
+
+  error() {
+    this.showSpinner = false;
+    this.showError = true;
   }
 
   transformTags(val) {

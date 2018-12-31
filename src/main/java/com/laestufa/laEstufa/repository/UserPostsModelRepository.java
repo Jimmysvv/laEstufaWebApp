@@ -20,4 +20,7 @@ public interface UserPostsModelRepository extends JpaRepository<UserPostsModel,L
 
     @Query(value = "CALL getCurrentUserPosts(:postId)", nativeQuery = true)
     List<Map> getCurrentUserPosts(@Param("postId") String postId);
+
+    @Query(value = "CALL getAllFollowingPosts(:userId)", nativeQuery = true)
+    List<Map> getAllFollowingPosts(@Param("userId") String userId);
 }

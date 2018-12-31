@@ -46,8 +46,9 @@
           </li>
           <li id="write">
             <form #formW (submit)="createNewPost($event)">
+              <div class="uk-text-small uk-align-right uk-margin-remove">{{counter}} characters left.</div>
               <div class="post-block-content">
-                <textarea class="uk-textarea" rows="7" placeholder="Right here!" value="" maxlength="150" id="contents"></textarea>
+                <textarea (keyup)="count($event)" class="uk-textarea" rows="7" placeholder="Right here!" value="" maxlength="200" id="contents"></textarea>
               </div>
               <div class="post-block-activity">
                 <button class="uk-button uk-button-default uk-width-1-1">Submit</button>

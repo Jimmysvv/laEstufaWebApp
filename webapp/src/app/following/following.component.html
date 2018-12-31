@@ -1,0 +1,5 @@
+<span *ngIf="isLoggedIn">
+  <span #followInfo *ngIf="!checkForFollowing(authorId)" (click)="follow($event)">
+     {{value}}&nbsp;&nbsp;
+  </span>
+</span>

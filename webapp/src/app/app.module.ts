@@ -21,6 +21,9 @@ import {EditPageGuardGuard} from './edit-page-guard.guard';
 import { DiscoverComponent } from './discover/discover.component';
 import { SearchComponent } from './search/search.component';
 import { SafePipe } from './safe.pipe';
+import { FollowingComponent } from './following/following.component';
+import { MoreComponent } from './more/more.component';
+import { LikeComponent } from './like/like.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,10 @@ import { SafePipe } from './safe.pipe';
     EditProfileComponent,
     DiscoverComponent,
     SearchComponent,
-    SafePipe
+    SafePipe,
+    FollowingComponent,
+    MoreComponent,
+    LikeComponent
   ],
   imports: [
     BrowserModule,

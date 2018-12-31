@@ -8,8 +8,14 @@
           <a class="post-author" (click)="goToUser(userPost.login)" >&nbsp;{{userPost.login}}</a>
           <div class="post-date">&nbsp;{{userPost.date | date: 'MMM d, y, h:mm a'}}</div>
         </div>
-        <a class="uk-navbar-right">FOLLOW&nbsp;&nbsp;</a>
-        <a class="uk-navbar-right uk-margin-remove" uk-icon="more-vertical"></a>
+        <a class="uk-navbar-right">
+          <app-following [loggedIn]="loggedIn"
+                         [authorId]="userPost.author_id"
+                         [authorLogin]="userPost.login"></app-following>
+        </a>
+        <a class="uk-navbar-right uk-margin-remove">
+          <app-more [loggedIn]="loggedIn"></app-more>
+        </a>
       </div>
       <div class="post-block-content">
         <img *ngIf="userPost.image != null" [src]="atob(userPost.image)" alt="">
@@ -18,12 +24,7 @@
       </div>
       <div class="post-block-content" [hidden]="userPost.image == null || !userPost.contents"
            [innerHTML]="transformTags(userPost.contents) | safe: 'html'"></div>
-      <div class="post-block-activity uk-navbar">
-        <div class="uk-navbar-left">
-          <a uk-icon="heart"></a>
-          <span class="uk-margin-small-left">0</span>
-        </div>
-      </div>
+      <app-like [loggedIn]="loggedIn"></app-like>
     </div>
   </div>
 </div>
@@ -33,5 +34,5 @@
 </div>
 
 <div #lackOfPosts [hidden]="!showError">
-  <h4 class="lackOfSth uk-position-center">We're currently out of content for you</h4>
+  <h4 class="lackOfSth uk-position-center">{{errorMessage}}</h4>
 </div>

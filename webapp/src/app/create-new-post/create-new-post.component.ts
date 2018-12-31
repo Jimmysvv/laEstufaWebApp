@@ -17,6 +17,7 @@ export class CreateNewPostComponent implements OnInit {
   // fileName: string;
   size: number;
   file: File;
+  counter: number = 200;
 
   constructor(private _createNewPostService: CreateNewPostService,
               private _router: Router) { }
@@ -93,5 +94,11 @@ export class CreateNewPostComponent implements OnInit {
         }
       });
       */
+  }
+
+  count(event) {
+    event.preventDefault();
+    let size = event.target.value.length;
+    this.counter = 200 - size;
   }
 }

@@ -4,21 +4,18 @@ import com.laestufa.laEstufa.model.JwtUser;
 import com.laestufa.laEstufa.model.UserModel;
 import com.laestufa.laEstufa.security.JwtGenerator;
 import com.laestufa.laEstufa.service.interfaces.UserModelService;
-import jdk.nashorn.internal.parser.JSONParser;
-import netscape.javascript.JSObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpCookie;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.jws.WebParam;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
 
-@Controller
+@RestController
 @RequestMapping(value = "/login")
 public class LoginPageController {
 
@@ -32,7 +29,6 @@ public class LoginPageController {
     }
 
     @RequestMapping(value = "/token", method = RequestMethod.POST)
-    @ResponseBody
     public Map getToken(@RequestBody final UserModel user, HttpSession httpSession) {
         if (userModelService.verifyUser(user)) {
             Map<String, String> map = new HashMap<>();

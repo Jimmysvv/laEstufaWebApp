@@ -1,6 +1,7 @@
 package com.laestufa.laEstufa.controller;
 
 import com.laestufa.laEstufa.model.UserPostsModel;
+import com.laestufa.laEstufa.service.interfaces.FollowService;
 import com.laestufa.laEstufa.service.interfaces.UserModelService;
 import com.laestufa.laEstufa.service.interfaces.UserPostsService;
 import com.sun.istack.internal.logging.Logger;
@@ -16,7 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Controller
+@RestController
 public class UserPostsController {
 
 
@@ -26,28 +27,32 @@ public class UserPostsController {
     @Autowired
     private UserModelService userModelService;
 
+    @Autowired
+    private FollowService followService;
+
     private final Logger log = Logger.getLogger(getClass());
 
     @RequestMapping(value = "/give/all", method = RequestMethod.GET)
-    @ResponseBody
     public List<Map> findAllPosts() {
         return userPostsService.findAllPosts();
     }
 
     @RequestMapping(value = "/give/all/{login}", method = RequestMethod.GET)
-    @ResponseBody
     public List<Map> findAllUserPosts(@PathVariable("login") String login) {
         return userPostsService.findAllUserPosts(login);
     }
 
     @RequestMapping(value = "/give/current/{postId}", method = RequestMethod.GET)
-    @ResponseBody
     public List<Map> getCurrentUserPosts(@PathVariable("postId") String postId) {
         return userPostsService.getCurrentUserPosts(postId);
     }
 
+    @RequestMapping(value = "/get/followingPosts/{userId}", method = RequestMethod.GET)
+    public List<Map> getAllFollowingPosts(@PathVariable("userId") String userId) {
+        return userPostsService.getAllFollowingPosts(userId);
+    }
+
     @RequestMapping(value = "/get/post/create", method = RequestMethod.POST)
-    @ResponseBody
     public Map createNewPost(@RequestBody UserPostsModel request,
                                     @RequestHeader("Authorization") String token,
                                     @RequestHeader("Session") String session,
@@ -69,7 +74,6 @@ public class UserPostsController {
     }
 
     @RequestMapping(value = "/get/post/upload", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @ResponseBody
     public Map upload(@RequestBody MultipartFile file,
                       @RequestHeader("Authorization") String token,
                       @RequestHeader("Session") String session,
