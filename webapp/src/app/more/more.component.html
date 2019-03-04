@@ -1,10 +1,14 @@
 <span *ngIf="isLoggedIn">
   <div class="uk-inline">
-    <span uk-icon="more-vertical"></span>
-    <div uk-dropdown="mode: click;pos: left-center" class="uk-padding-small">
-      <ul class="uk-nav uk-navbar-dropdown-nav">
-        <li><span uk-icon="forward"></span><span class="uk-margin-small-left">Share</span></li>
-      </ul>
+    <span href="#modal-center" uk-icon="more-vertical" uk-toggle></span>
+    <div id="modal-center" class="uk-flex-top" uk-modal>
+      <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+        <div><span uk-icon="forward"></span><span class="uk-margin-small-left">Share</span></div>
+        <div><span uk-icon="chevron-right"></span><span class="uk-margin-small-left">Unfollow</span></div>
+        <div *ngIf="isPostAuthor"><span uk-icon="history"></span><span class="uk-margin-small-left">Archive</span></div>
+        <div *ngIf="isPostAuthor"><span uk-icon="trash"></span><span class="uk-margin-small-left">Delete</span></div>
+        <div *ngIf="isPostAuthor"><span uk-icon="commenting"></span><span class="uk-margin-small-left">Turn off commenting</span></div>
+      </div>
     </div>
   </div>
 </span>

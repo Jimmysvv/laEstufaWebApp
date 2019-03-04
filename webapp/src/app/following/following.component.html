@@ -3,3 +3,11 @@
      {{value}}&nbsp;&nbsp;
   </span>
 </span>
+
+<span *ngIf="userProfilePage && userProfile">
+  <div class="uk-text-muted uk-text-small">
+    <span>{{postCounter}}</span><b>&nbsp;&#8739;&nbsp;</b>
+    <span>{{userFollowCounter[0].follower}}</span><b>&nbsp;&#8739;&nbsp;</b>
+    <span>{{userFollowCounter[0].following}}</span>
+  </div>
+</span>

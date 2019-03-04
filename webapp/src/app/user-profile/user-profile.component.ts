@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import {UserProfileService} from './user-profile.service';
+import {FollowingService} from '../following/following.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -14,8 +15,11 @@ export class UserProfileComponent implements OnInit {
   userProfileDetails: boolean;
   showSpinner: boolean;
   showError: boolean;
+  postCounter: number;
+  userFollowCounter: any = [];
 
   constructor(private _route: ActivatedRoute,
+              private _followingService: FollowingService,
               private _router: Router,
               private _userProfileService: UserProfileService) {
     _route.params.subscribe(val => {
@@ -28,6 +32,9 @@ export class UserProfileComponent implements OnInit {
             this.userData = data;
             this.userProfileDetails = this.checkForUserProfileDetails(this.userData);
             this.showSpinner = false;
+            this._followingService.getUserFollowCounter(data.id).subscribe(response => {
+              this.userFollowCounter = response;
+            });
           } else {
             this.showSpinner = false;
             this.showError = true;
@@ -41,6 +48,10 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit() { }
+
+  userPostCounter(counter: number) {
+    this.postCounter = counter;
+  }
 
   private checkForUserProfileDetails(data: any) {
     return (data.name && data.last_name && data.description) !== null;

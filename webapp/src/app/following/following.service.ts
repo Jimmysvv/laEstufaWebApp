@@ -29,6 +29,16 @@ export class FollowingService {
     return this._http.get<follow>(url, this.httpOptions);
   }
 
+  getUserFollowers(authorId: string) {
+    let url = '/get/followers/' + authorId;
+    return this._http.get<follow>(url, this.httpOptions);
+  }
+
+  getUserFollowCounter(userId: number) {
+    let url = '/followCounter/' + userId;
+    return this._http.get<follow>(url);
+  }
+
   checkForFollowing(authorId: string, userFollowing: any) {
     return authorId === localStorage.getItem('UserId') ?
       true : Array.from(userFollowing.split(',')).find(val => val === authorId);

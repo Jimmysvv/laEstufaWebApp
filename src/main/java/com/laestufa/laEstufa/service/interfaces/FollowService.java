@@ -14,4 +14,6 @@ public interface FollowService {
     boolean follow(final FollowModel newFollower);
 
     boolean unfollow(final FollowModel unfollow);
+
+    List<Map> getUserFollowCounter(final Integer userId);
 }

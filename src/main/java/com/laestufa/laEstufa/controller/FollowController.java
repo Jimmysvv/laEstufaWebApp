@@ -28,6 +28,11 @@ public class FollowController {
         return followService.getUserFollowing(userId);
     }
 
+    @RequestMapping(value = "/followCounter/{userId}", method = RequestMethod.GET)
+    public List<Map> getUserFollowCounter(@PathVariable("userId") Integer userId) {
+        return followService.getUserFollowCounter(userId);
+    }
+
     @RequestMapping(value = "/get/follow", method = RequestMethod.POST)
     public boolean followUser(@RequestBody FollowModel newFollower,
                              @RequestHeader("Authorization") String token,

@@ -11,6 +11,7 @@ interface user {
   enable_mat: boolean;
   description: string;
   avatar: string;
+  id: number;
 }
 
 @Injectable({

@@ -23,4 +23,7 @@ public interface FollowRepository extends JpaRepository<FollowModel, Long> {
     @Query(value = "CALL unfollow(:follower, :following)", nativeQuery = true)
     boolean unfollow(@Param("follower") Integer follower,
                      @Param("following") Integer following);
+
+    @Query(value = "CALL getUserFollowCounter(:userId)", nativeQuery = true)
+    List<Map> getUserFollowCounter(@Param("userId") Integer userId);
 }

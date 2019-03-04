@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {UserPostBlockService} from './user-post-block.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../auth.service';
@@ -20,6 +20,7 @@ export class UserPostBlockComponent implements OnInit {
   postId: string;
   usersIdList: any = [];
   errorMessage = 'We\'re currently out of content for you.';
+  @Output() postCounter: EventEmitter<number> = new EventEmitter();
 
   constructor(private _userPostService: UserPostBlockService,
               private _followingService: FollowingService,
@@ -36,6 +37,7 @@ export class UserPostBlockComponent implements OnInit {
       this.loggedIn = !!(userId || this._auth.isLoggedIn);
       if (this.userlogin) {
         this._userPostService.getAllCurrentUserPosts(login).subscribe(data => {
+          this.postCounter.emit(data.length);
           this.success(data);
         }, () => {
           this.error();
@@ -56,7 +58,7 @@ export class UserPostBlockComponent implements OnInit {
         this._userPostService.getAllFollowingPosts(userId).subscribe(data => {
           this.showSpinner = false;
           if (data.length === 0 || !data[0].hasOwnProperty('login')) {
-            this.errorMessage = 'There\'s no post. Follow someone with content.';
+            this.errorMessage = 'There\'s no post. Follow someone with it.';
             this.showError = true;
           } else {
             this.success(data);
@@ -64,14 +66,16 @@ export class UserPostBlockComponent implements OnInit {
         }, () => {
           this.error();
         });
+        this._followingService.getUserFollowing(userId).subscribe(data => {
+          let resultData: any;
+          const list = [];
+          resultData = data;
+          resultData.forEach(dataRow => {
+            list.push(dataRow.following);
+          });
+          localStorage.setItem('following', list.toString());
+        });
       }
-      this._followingService.getUserFollowing(localStorage.getItem('UserId')).subscribe(data => {
-        const list = [];
-        for (const self of data) {
-          list.push(self.following);
-        }
-        localStorage.setItem('following', list.toString());
-      });
     });
   }
 
@@ -103,7 +107,7 @@ export class UserPostBlockComponent implements OnInit {
     const regex = /\B(\#[a-zA-Z_1-9]+\b)(?!;)/g;
     const matches = this.getMatches(val, regex, 1);
     // find da way to routerLink properly
-    for (let match of matches) {
+    for (const match of matches) {
       const replace = '<a routerLink="/search/' + match.substring(1) + '" class="uk-padding-remove uk-text-small">' +
         match + '&nbsp;</a>';
       val = val.replace(match, replace);
@@ -112,7 +116,7 @@ export class UserPostBlockComponent implements OnInit {
   }
 
   getMatches(string, regex, index) {
-    let matches = [];
+    const matches = [];
     let match;
     while (match = regex.exec(string)) {
       matches.push(match[index]);

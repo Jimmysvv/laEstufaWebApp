@@ -14,7 +14,8 @@
                          [authorLogin]="userPost.login"></app-following>
         </a>
         <a class="uk-navbar-right uk-margin-remove">
-          <app-more [loggedIn]="loggedIn"></app-more>
+          <app-more [loggedIn]="loggedIn"
+                    [authorId]="userPost.login"></app-more>
         </a>
       </div>
       <div class="post-block-content">

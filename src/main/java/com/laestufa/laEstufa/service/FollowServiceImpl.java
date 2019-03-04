@@ -34,4 +34,9 @@ public class FollowServiceImpl implements FollowService {
     public boolean unfollow(FollowModel unfollow) {
         return followRepository.unfollow(unfollow.getFollower(), unfollow.getFollowing());
     }
+
+    @Override
+    public List<Map> getUserFollowCounter(Integer userId) {
+        return followRepository.getUserFollowCounter(userId);
+    }
 }

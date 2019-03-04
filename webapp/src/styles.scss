@@ -22,13 +22,13 @@
 
 nav {
   margin-top: -10px;
-  /*margin-left: -15px;*/
   padding: 10px 0;
   height: 38px;
 }
 
 #navmenu {
   color: floralwhite;
+  padding: 0 8px;
 }
 #navmenu :hover {
   color: lightgray;
@@ -40,9 +40,6 @@ nav {
   opacity: 0.95;
   background-color: #b33939;
   //box-shadow: -3px 0 #a13333, -6px 0 #7d2727, -9px 0 #591c1c;
-}
-.uk-navbar-toggle {
-  padding: 0 7px;
 }
 .menu-bottom-line {
   border-bottom: 1px solid rgba(255,255,255,.7);
